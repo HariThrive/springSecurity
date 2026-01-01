@@ -1,9 +1,10 @@
 package com.springSecurity.springSecurity.repo;
 
-import java.util.Optional;
+import java.util.Optional; 
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.security.core.userdetails.User;
+
+import com.springSecurity.springSecurity.entity.User;
 
 public interface UserRepository extends JpaRepository<User, Long>{
 

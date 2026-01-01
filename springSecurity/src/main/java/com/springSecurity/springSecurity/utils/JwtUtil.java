@@ -27,16 +27,18 @@ public String generateToken(String email) {
 
 public boolean validateJwtToken(String token) {
 	try {
-		Jwts.parser().setSigningKey(secretKey)
-		.build()
-		.parseClaimsJws(token)
-		.getBody()
-		.getSubject();
-		
+		extractEmail(token);
 		return true;
 	}
 	catch(JwtException e) {
 		return false;
 	}
+}
+public String extractEmail(String token) {
+	return Jwts.parser().setSigningKey(secretKey)
+			.build()
+			.parseClaimsJws(token)
+			.getBody()
+			.getSubject();
 }
 }
