@@ -30,6 +30,7 @@ public class AuthController {
 	public ResponseEntity<String> registerUser(@RequestBody Map<String,String> body) {
 		String email = body.get("email");
 		String password = body.get("password");
+		password = passwordEncoder.encode(password);
 		if(userRepository.findByEmail(email).isPresent()) {
 			return new ResponseEntity<>("email already exists",HttpStatus.CONFLICT);
 			

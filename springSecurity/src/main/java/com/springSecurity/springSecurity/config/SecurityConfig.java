@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.springSecurity.springSecurity.utils.JwtFilter;
 
@@ -18,8 +19,9 @@ public class SecurityConfig {
 		http.csrf(AbstractHttpConfigurer::disable)
 			.authorizeHttpRequests(auth ->auth
 			.requestMatchers("/auth/**").permitAll()
+//			 .requestMatchers("/product/**").authenticated()
 			.anyRequest().authenticated())
-			.addFilterBefore(jwtFilter, null);
+			.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 //			.httpBasic(Customizer.withDefaults());
 		return http.build();
 	}

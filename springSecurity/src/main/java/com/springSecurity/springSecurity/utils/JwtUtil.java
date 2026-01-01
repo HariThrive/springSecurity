@@ -13,7 +13,7 @@ import io.jsonwebtoken.security.Keys;
 
 @Component
 public class JwtUtil {
-private final String SECRET ="hello world ";
+private final String SECRET ="hello world,how are you ,i am good learn more,work hard  ";
 private final long EXPIRATION = 1000*60;
 private final Key secretKey = Keys.hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));
 
