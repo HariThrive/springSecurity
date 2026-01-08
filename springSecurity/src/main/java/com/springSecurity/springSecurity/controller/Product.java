@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/product")
+//@RequestMapping("/auth")
 public class Product {
 	
 	@GetMapping("/")
@@ -14,5 +14,21 @@ public class Product {
 	public String print() {
 		return "hello world";
 	}
+	
+	@GetMapping("/register")
+    public String registerPage() {
+        return "html/register"; // templates/register.html
+    }
+	
+
+	@GetMapping("/login")
+    public String loginPage() {
+        return "html/login"; // templates/register.html
+    }
+	
+	 @GetMapping("/index")
+	    public String indexPage() {
+	        return "html/index";   // ⬅️ IMPORTANT
+	    }
 
 }

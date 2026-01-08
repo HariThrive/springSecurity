@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +27,7 @@ public class AuthController {
 	private final PasswordEncoder passwordEncoder;
 	private final JwtUtil jwtUtil; 
 	
-	@PostMapping("/registerUser")
+	@PostMapping("/register")
 	public ResponseEntity<String> registerUser(@RequestBody Map<String,String> body) {
 		String email = body.get("email");
 		String password = body.get("password");
@@ -36,8 +37,9 @@ public class AuthController {
 			
 		}
 		userService.createUser(User.builder().email(email).password(password).build());
-		return new ResponseEntity<>("Successfully saved",HttpStatus.CONFLICT);
+		return new ResponseEntity<>("Successfully saved",HttpStatus.CREATED);
 	}
+	
 	 
 	@PostMapping("/login")
 	public ResponseEntity<?> loginUser(@RequestBody Map<String,String> body) {

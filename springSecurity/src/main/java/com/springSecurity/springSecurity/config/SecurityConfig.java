@@ -23,7 +23,12 @@ public class SecurityConfig {
 		http.csrf(AbstractHttpConfigurer::disable)
 		.cors(cors -> cors.configurationSource(corsConfiguration()))
 			.authorizeHttpRequests(auth ->auth
+					.requestMatchers("/register", "/login","/index").permitAll()
+					.requestMatchers("/js/**").permitAll()
+//					.requestMatchers("/index").authenticated()
+
 			.requestMatchers("/auth/**").permitAll()
+//			.requestMatchers("/index").permitAll() 
 //			 .requestMatchers("/product/**").authenticated()
 			.anyRequest().authenticated())
 			.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
@@ -40,7 +45,8 @@ public class SecurityConfig {
 	public CorsConfigurationSource corsConfiguration() {
 		CorsConfiguration configuration = new CorsConfiguration();
 		configuration.setAllowedOrigins(List.of("*"));//orgin website 
-		configuration.setAllowedMethods(List.of("GET","POST","PUT"));
+		configuration.setAllowedMethods( List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+		
 		configuration.setAllowedHeaders(List.of("*"));
 		
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
