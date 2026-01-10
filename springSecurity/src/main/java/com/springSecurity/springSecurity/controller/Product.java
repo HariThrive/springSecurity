@@ -1,5 +1,6 @@
 package com.springSecurity.springSecurity.controller;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,8 +28,8 @@ public class Product {
     }
 	
 	 @GetMapping("/index")
-	    public String indexPage() {
-	        return "html/index";   // ⬅️ IMPORTANT
+	    public String indexPage(Authentication authentication) {
+	        return "html/index";   
 	    }
 
 }

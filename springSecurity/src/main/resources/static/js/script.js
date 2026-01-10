@@ -22,7 +22,8 @@ function login() {
 	})
 	.then(data =>{
 		localStorage.setItem("token",data.token);
-		window.location.href = "/index";
+//		window.location.href = "/index";
+ loadIndex();
 
 	})
 	.catch(error=>{alert(error.message)});
@@ -30,8 +31,33 @@ function login() {
 
 }
 
+function loadIndex() {
+    const token = localStorage.getItem("token");
+
+    fetch("/index", {
+        method: "GET",
+        headers: {
+            "Authorization": "Bearer " + token
+        }
+    })
+    .then(res => {
+        if (!res.ok) throw new Error("Unauthorized");
+        return res.text();
+    })
+    .then(html => {
+        // Replace whole page with index HTML
+     window.location.href = "/index";
+    })
+    .catch(err => {
+        alert("JWT invalid or expired");
+        window.location.href = "/login";
+    });
+}
+
+
 // Register page logic
 function register() {
+	debugger
 const email = document.getElementById("email").value;
 	const password = document.getElementById("password").value;
 	
